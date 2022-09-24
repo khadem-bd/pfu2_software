@@ -1,0 +1,23 @@
+.drilldown-summary {
+    display: block;
+    background-color: $white;
+    padding: 20px;
+    border-bottom: 3px solid $red;
+    color: $dark;
+    transition: all 0.5s ease;
+    &:hover {
+        box-shadow: 5px 5px 15px 2px rgba(0, 0, 0, 0.1);
+        text-decoration: none;
+        color: $black;
+    }
+    h2 {
+        font-size: 50px;
+        font-weight: 300;
+        margin-bottom: 10px;
+    }
+    p {
+        margin: 0;
+        font-weight: 400;
+        font-size: 16px;
+    }
+}
