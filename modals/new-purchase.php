@@ -44,14 +44,19 @@ include "controllers/coreFunctions/connect.php";
                         <div class="col-sm-12 col-md-3 col-lg-3">
                             <div class="form-group">
                                 <label>Card Used</label>
-                                <select name="card" id="" class="form-control">
+                                <select name="card" id="card" class="form-control">
+                                    <option class="form-control" value="" disabled selected>Select Card</option>
                                     <?php
                                     $sql = 'SELECT * FROM card_beneficairy ORDER BY id DESC';
                                     $result = $conn->query($sql);
                                     while($row = $result->fetch_assoc()){
-                                        echo "<option>" . dataDecrypt($row['card_holder_name']) .' - '.dataDecrypt($row['card_type']). "</option>";
+                                        // echo "<option>" . dataDecrypt($row['card_holder_name']) .' - '.dataDecrypt($row['card_type']). "</option>";
+                                        ?>
+                                        <option value="<?= $row['id'];?>"><?=dataDecrypt($row['card_holder_name'])?>- <?=dataDecrypt($row['card_type'])?> </option>
+                                   <?php 
                                     }
-                                    ?>
+                                   ?> 
+                                
                                 </select>
                             </div>
                         </div>
@@ -70,11 +75,11 @@ include "controllers/coreFunctions/connect.php";
                         </div>
                         <div class="col-sm-12 col-md-2 col-lg-2">
                             <div class="form-group">
-                                <label>Currency</label>
-                                <select name="currency" id="" class="form-control">
+                                <label>Currency Amount</label>
+                                <select name="currency" id="currency" class="form-control">
                                     <option class="form-control" value="country">Select Currency</option>
-                                    <option class="form-control" value="usd">USD ($)</option>
-                                    <option class="form-control" value="bgp">BGP (£)</option>
+                                    <!-- <option class="form-control" value="usd">USD ($)</option>
+                                    <option class="form-control" value="bgp">BGP (£)</option> -->
                                 </select>
                             </div>     
                         </div>

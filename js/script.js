@@ -1,4 +1,19 @@
 $(document).ready(function() {
+
+    $("body").on("change", "#card", function() {
+        var card_id = $(this).val();
+        $.ajax({
+            type: "POST",
+            url: "currencyAction.php",
+            data: {cardID:card_id },
+            success: (function(data) {
+                $('#currency').html(data);
+            })
+        });
+    });
+
+
+
     $("body").on("click", ".drilldown-summary", function(event) {
         event.preventDefault();
         var target = $(this).attr("href");
@@ -82,6 +97,8 @@ $(document).ready(function() {
         $(".autoCompleteValue").val(option);
         $(".autosuggestions").removeClass("show");
     });
+
+
 })
 
 function getAutoEntryTableVal(targetElem, key, searchKeyColName, columnName, tableName) {
