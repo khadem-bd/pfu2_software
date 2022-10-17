@@ -2,6 +2,8 @@
 <html>
 <?php
 include "bundling.php";
+include "controllers/coreFunctions/connect.php";
+include "controllers/coreFunctions/coreFunction.php";
 
 ?>
 
@@ -13,7 +15,7 @@ include "bundling.php";
         if($userid != "unset_signOut"){
             include "header.php";
             include "sidebar.php";
-            // include "modals/new-purchase.php";
+            include "modals/new-purchase.php";
             
     ?>
     <div class="container-fluid">
@@ -29,17 +31,33 @@ include "bundling.php";
                         <div class="col-sm-12 col-md-12 col-lg-12">
                             <table>
                                 <tr>
-                                    <th>Product</th>
-                                    <th>Selling Price</th>
-                                    <th>Purchase</th>
-                                    <th>Cancel</th>
+                                    <th class="text-center">Order ID</th>
+                                    <th class="text-center">Customer Name</th>
+                                    <th class="text-center">Product Description</th>
+                                    <th class="text-center">Product URL</th>
+                                    <th class="text-center">Quantity</th>
+                                    <th class="text-center">Size</th>
+                                    <th class="text-center">Color</th>
+                                    <th class="text-center">Buying Price</th>
+                                    <th class="text-center">Selling Price</th>
+                                    <th class="text-center">Gross Profit</th>
+                                    <th class="text-center">Card Used</th>
+                                    <th class="text-center">Source</th>
+                                    <th class="text-center">Country</th>
+                                    <th class="text-center">Order Date</th>
+                                    <th class="text-center">Purchase Date</th>
                                 </tr>
-                                <tr>
-                                    <td><a href="">Amazon Echo</a></td>
-                                    <td>$59.99</td>
-                                    <td class="red-text"><a class="triggerPurchaseForm" href="#newPurchase"><span class="icon-purchase icon"></span> Purchase</a></td>
-                                    <td class="red-text"><a href=""><span class="icon-close icon"></span> <span class="txt">Cancel Order</span></a></td>
-                                </tr>
+                                <?php
+                                    //INNER JOIN QUERY TO FETCH DATA THROUGH CUSTOMER ID 
+                                    $sql = 'SELECT * FROM purchased';
+                                    $result = $conn->query($sql);
+                                    while($row = $result->fetch_assoc()){
+                                        echo "<tr>
+                                                
+                                                
+                                            </tr>";   
+                                    }
+                                    ?> 
                             </table>
                         </div>
                     </div>

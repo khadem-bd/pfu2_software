@@ -4,16 +4,16 @@ include "controllers/coreFunctions/connect.php";
 
 
 $html = "";
-$cardId = $_POST['cardID'];
-$sql = "SELECT * FROM card_beneficairy WHERE id = '$cardId' ORDER BY exchange_rateD,exchange_rateP ";
+$cardID = $_POST['card_id'];
+$sql = "SELECT * FROM card_beneficairy WHERE id = '$cardID'";
 $result = $conn->query($sql);
 $html .='<option value="" disabled selected>Select Currency</option>';
 while ($row = $result->fetch_assoc()) {
     $usd = "USD - ";
-    $bgp = "BGP - ";
+    $bgp = "GBP - ";
     $amount = " TK";
-    $html = $html.'<option value="USD'.$row["id"].'">'.$usd.$row["exchange_rateD"].$amount.'</option>'.
-     '<option value="BGP'.$row["id"].'">'.$bgp.$row["exchange_rateP"].$amount.'</option>';
+    $html = $html.'<option data-rate="'.$row["exchange_rateD"].'" value="USD'.$row["exchange_rateD"].'">'.$usd.$row["exchange_rateD"].$amount.'</option>'.
+                  '<option data-rate="'.$row["exchange_rateP"].'" value="BGP'.$row["exchange_rateP"].'">'.$bgp.$row["exchange_rateP"].$amount.'</option>';
 }
 echo $html;
 ?>

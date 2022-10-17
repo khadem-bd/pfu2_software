@@ -2,13 +2,12 @@
     include "coreFunctions/connect.php";
     include "coreFunctions/coreFunction.php";
 
+    $id = $_POST['id'];
     $source = sterilizeValue($_POST['sourcing']);
     $address = sterilizeValue($_POST['address']);
     $counrtryOfOrigin = sterilizeValue($_POST['country_of_origin']);
     $weightCharge = sterilizeValue($_POST['weight_charge']);
-    
 
-   
 
     if(empty($source) || empty($address) || empty($counrtryOfOrigin) || empty($weightCharge)){
         echo "Please fill up all the input fields";
@@ -17,15 +16,13 @@
         $address = dataEncrypt($address);
         $counrtryOfOrigin = dataEncrypt($counrtryOfOrigin);
         $weightCharge = dataEncrypt($weightCharge);
-        
-        
-        
-        if(checkDataExistance("address_beneficiary", array("sourcing","address", "country_of_origin"), array($source,$address,$counrtryOfOrigin))){
-            echo "This address already exists";
+
+        $colNames = array("sourcing", "address", "country_of_origin", "weight_charge");
+        $colValues = array($source, $address, $counrtryOfOrigin, $weightCharge,$id);
+        if(update("address_beneficiary", $colNames, $colValues, "id")){
+            echo "Address information updated successfully";
         }else{
-            if(insert("address_beneficiary", array("sourcing","address","country_of_origin", "weight_charge"), array($source,$address,$counrtryOfOrigin,$weightCharge))){
-                echo "New address added successfully";
-            }
+            echo "Information update failed, try again";
         }
     }
 ?>

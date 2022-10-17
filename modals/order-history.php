@@ -12,7 +12,6 @@ include "controllers/coreFunctions/coreFunction.php";
             </div>
         </div>
         
-
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12">
                 <div class="tile">
@@ -37,32 +36,48 @@ include "controllers/coreFunctions/coreFunction.php";
                             </div>
                         </div>
                     </div>
+
+
                    
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12">                          
                           <table>
-                              <thead>
+                            <?php
+                            include "modals/new-purchase.php"; 
+                            ?>
+                              <thead class="text-center">
                                 <tr>
                                     <th>Product Description</th>
+                                    <th>Color</th>
+                                    <th>Size</th>
                                     <th>Product URL</th>
-                                    <th>Order Date</th>
+                                    <th>Origin</th>
                                     <th>Unit Price</th>
                                     <th>Quantity</th>
                                     <th>Total Price</th>
                                     <th>Advance</th>
                                     <th>Remaining</th>
                                     <th>Status</th>
+                                    <?php
+                                    if($_COOKIE['usertype'] == "Super Admin"){ 
+                                    ?>
                                     <th>Action</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
+                                    <?php 
+                                    }
+                                    ?>
+                                    
                                 </tr>
                               </thead>
 
                               <tbody id="fetch-data">
-      
+                                
                               </tbody>
+
                               
                                </table>
+                               
  
                         </div>
                     </div>
@@ -71,5 +86,6 @@ include "controllers/coreFunctions/coreFunction.php";
         </div>
     </div>
 </div>
-    
+
+
 

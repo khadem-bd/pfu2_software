@@ -5,9 +5,10 @@ include "bundling.php";
 ?>
 <body>
     <?php
-    if(isset($_COOKIE['userid'])){
+    if(isset($_COOKIE['userid']) && isset($_COOKIE['usertype'])){
         $userid = $_COOKIE['userid'];
-        if($userid != "unset_signOut"){
+        $userType = $_COOKIE['usertype'];
+        if($userid != "unset_signOut" && $userType != "unset_signOut"){
             include "modals/order-history.php";
             include "modals/new-customers.php";
             include "header.php";
@@ -17,35 +18,38 @@ include "bundling.php";
 <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12 col-md-4 col-lg-4">
-                <a class="drilldown-summary" href="#orderHistory">
+                <a class="drilldown-summary" href="javascript:void(0)">
                     <h2>
                         <?php 
                         include "controllers/coreFunctions/connect.php";
-                        $sql = 'SELECT count(distinct order_serial_no) FROM order_serial GROUP BY order_serial_no';
+                        $sql = 'SELECT count(distinct order_id) FROM orders GROUP BY order_id';
                         $result = $conn->query($sql);
                         $row = mysqli_num_rows($result);
                         echo $row;
                         ?>
                     </h2>
-                    <p>Orders Recieved This Month</p>
+                    <p>Total Order Received</p>
                 </a>
             </div>
             <div class="col-sm-12 col-md-4 col-lg-4">
-                <a class="drilldown-summary" href="#">
+                <a class="drilldown-summary" href="javascript:void(0)">
                     <h2>
                     <?php 
                         include "controllers/coreFunctions/connect.php";
-                        $sql = 'SELECT sum(distinct grand_total) FROM orders';
+                        $sql = 'SELECT * FROM orders GROUP BY order_id';
                         $result = $conn->query($sql);
-                        $row = mysqli_num_rows($result);
-                        echo $row;
+                        $totalRevenue=0;
+                        while($row=$result->fetch_assoc()){
+                            $totalRevenue = $totalRevenue + $row['grand_total'];
+                        }
+                        echo $totalRevenue;
                     ?>   
                     </h2>
                     <p>Total Revenue/Sales</p>
                 </a>
             </div>
             <div class="col-sm-12 col-md-4 col-lg-4">
-                <a class="drilldown-summary" href="#newCustomers">
+                <a class="drilldown-summary" href="javascript:void(0)">
                     <h2>
                     <?php 
                         include "controllers/coreFunctions/connect.php";
@@ -55,7 +59,7 @@ include "bundling.php";
                         echo $row;
                         ?>
                     </h2>
-                    <p>New Customer Joined this month</p>
+                    <p>Total Customer</p>
                 </a>
             </div> 
         </div>

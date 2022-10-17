@@ -19,6 +19,9 @@ $(document).ready(function() {
         showDetails(i);
     });
 
+
+
+
     //ADD NEW FORM CODE
 
     $('#addForm').click(function() {
@@ -50,18 +53,29 @@ $(document).ready(function() {
             </div>\
         </div>\
         <div class="row">\
-            <div class="col-sm-9 col-md-9 col-lg-9">\
+            <div class="col-sm-5 col-md-5 col-lg-5">\
                 <div class="form-group">\
                     <label>Product Description</label>\
                     <textarea class="form-control" name="product_desc[]"></textarea>\
                 </div>\
-            </div>\<div class="col-sm-3 col-md-3 col-lg-3">\
+            </div>\<div class="col-sm-2 col-md-2 col-lg-2">\
+            <div class="form-group">\
+                <label>Color</label>\
+                <input type="text" class="form-control" name="color[]">\
+            </div>\
+        </div>\<div class="col-sm-2 col-md-2 col-lg-2">\
+        <div class="form-group">\
+            <label>Size</label>\
+            <input type ="text" class="form-control" name="size[]"></textarea>\
+        </div>\
+    </div>\
+            <div class="col-sm-3 col-md-3 col-lg-3">\
             <div class="form-group">\
                 <label>Country of Origin</label>\
-                <select name="country_of_origin[]" id="">\
+                <select name="country_of_origin[]" class="form-control" id="">\
                     <option class="form-control" value="country">Select Country</option>\
-                    <option class="form-control" value="usa">USA</option>\
-                    <option class="form-control" value="uk">UK</option>\
+                    <option class="form-control" value="USA">USA</option>\
+                    <option class="form-control" value="UK">UK</option>\
                 </select>\
             </div>\
         </div>\
@@ -97,20 +111,19 @@ $(document).ready(function() {
         </div>\
     </div>');
 
+    $("#qty-" + i).change(function() {
+        showDetails(i)
+    });
+    $("#unitPrice-" + i).change(function() {
+        showDetails(i)
+    });
+    $("#adv-" + i).change(function() {
+        showDetails(i)
+    });
+    $("#remaining-" + i).change(function() {
+        showDetails(i)
+    });
 
-
-        $("#qty-" + i).change(function() {
-            showDetails(i)
-        });
-        $("#unitPrice-" + i).change(function() {
-            showDetails(i)
-        });
-        $("#adv-" + i).change(function() {
-            showDetails(i)
-        });
-        $("#remaining-" + i).change(function() {
-            showDetails(i)
-        });
     });
 
 
@@ -127,6 +140,35 @@ $(document).ready(function() {
         $("#grandTotal").val(calculateGT());
     })
 
+    // $("body").on("change", "#currency", function() {
+    //     var currencyAmount = $(this).attr('data-rate');
+    //     alert (currencyAmount);
+    //     var buyingUP = $("#buying").val();
+    //     var selling = $("#selling").val();
+    //     // var rate = $(this).attr('data-rate');
+    //     var total = currencyAmount * buyingUP;
+    //     var grossProfit = selling - total;
+    //     $("#buyingBDT").val(total);
+    //     $("#grossProfit").val(grossProfit);
+    // });
+    $("body").on("keyup", "#buying", function() {
+        var currencyAmount = $('#currency').children("option:selected").attr('data-rate');
+        
+        // currencyAmount = parseFloat(currencyAmount);
+        // console.log(currencyAmount);
+        var buyingUP = $(this).val();
+        // buyingUP = parseFloat(buyingUP);
+        // console.log(buyingUP);
+        var selling = parseFloat($("#selling").val());
+        var total = (parseFloat(currencyAmount) * parseFloat(buyingUP));
+        // console.log(total);
+        var grossProfit = (selling - total);
+        $("#buyingBDT").val(total);
+        $("#grossProfit").val(grossProfit);
+    });
+    
+
+
     //DRILLDOWN PRESENTATION OF ORDER DETAILS OF PARTICULAR CUSTOMER
 
     $("body").on("click", "#drilldown-summary", function(event) {
@@ -139,30 +181,14 @@ $(document).ready(function() {
             success: (function(data) {
                 $("#fetch-data").html(data);
                 $("#orderHistory").addClass("open");
+                
             })
         })
     })
 
-    //AJAX REQUEST TO INSERT THE DATAS THROUGH FORM
-
-    // $("#orderEntryForm").submit(function(e){
-    //     e.preventDefault();
-    //     $.ajax({
-    //         type: "POST",
-    //         url: "controllers/newCustomer&OrderEntry.php",
-    //         data: $(this).serialize(),
-    //         success: (function(data) {
-    //             $("#orderEntryForm")[0].reset();
-    //             $(".append_item").remove();
-    //             $("#show-alert").html(`<div class="alert alert-success" role="alert">${data}</div>`);
-    //         })
-    //     })
-    // })
-
     if ($('#customerIDSerial').length) {
         getIDGenerator();
     }
-
 
     if ($('#orderIDSerial').length) {
         getOrderIDGenerator();
@@ -200,8 +226,7 @@ function calculateGT() {
 
 
 
-//GET ID SERIAL
-
+//GET CUSTOMER ID SERIAL
 function getIDGenerator() {
     $.ajax({
         url: "controllers/customerIDGenerator.php",
@@ -214,8 +239,7 @@ function getIDGenerator() {
     });
 }
 
-
-
+//GET ORDER ID SERIAL
 function getOrderIDGenerator() {
     $.ajax({
         url: "controllers/orderIDGenerator.php",

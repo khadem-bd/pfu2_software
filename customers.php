@@ -24,7 +24,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12">
-                <h2>New Customers</h2>
+                <h2>Customer Details</h2>
             </div>
         </div>
         <div class="row">
@@ -32,35 +32,24 @@
                 <div class="tile">
                     <div class="row">
                         <div class="col-sm-12 col-md-3 col-lg-3">
-                            <div class="form-group">
+                            <div class="form-group" id="search-bar">
                                 <span class="icon-search icon"></span>
-                                <input type="text" class="form-control" placeholder="Search">
+                                <input type="text" class="form-control" id="search-customer" placeholder="Search">
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-3 col-lg-3"></div>
-                        <div class="col-sm-12 col-md-3 col-lg-3">
-                            <div class="form-group">
-                                <span class="icon-calander icon"></span>
-                                <input type="text" class="form-control" placeholder="Start Date">
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-3 col-lg-3">
-                            <div class="form-group">
-                                <span class="icon-calander icon"></span>
-                                <input type="text" class="form-control" placeholder="End Date">
-                            </div>
-                        </div>
+                        
                     </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12">
-                            <table>
+                            <table id="customer-data">
                                 <thead>
                                 <tr>
-                                    <th>Customer ID</th>
-                                    <th>Customer Name</th>
-                                    <th>Contact Number</th>
-                                    <th>Email Address</th>
-                                    <th>Shipping Address</th>
+                                    <th class="text-center">Customer ID</th>
+                                    <th class="text-center">Customer Name</th>
+                                    <th class="text-center">Contact Number</th>
+                                    <th class="text-center">Email Address</th>
+                                    <th class="text-center">Shipping Address</th>
                                     <th class="text-center">Edit</th>
                                     <th class="text-center">Delete</th>
                                 </tr>
@@ -68,30 +57,38 @@
 
                                 <tbody>
                                     <?php
-                                     $sql = 'SELECT * FROM CUSTOMERS ORDER BY id';
+                                     $sql = 'SELECT * FROM customers ORDER BY id';
                                      $result = $conn->query($sql);
-                                     while($row = $result->fetch_assoc()){
+                                     if(mysqli_num_rows($result)>0){
+
+                                    foreach($result as $row){
+                                     //while($row = $result->fetch_assoc()){
                                     ?>
                                 <tr>
-                                    <td><?php echo $row['customer_id']; ?></td>
-                                    <td><?php echo $row['name']; ?></td>
-                                    <td><?php echo $row['contact_no']; ?></td>
-                                    <td><?php echo $row['email_address']; ?></td>
-                                    <td><?php echo $row['shipping_address']; ?></td>
+                                    <td class="text-center"><?php echo $row['customer_id']; ?></td>
+                                    <td class="text-center"><?php echo $row['name']; ?></td>
+                                    <td class="text-center"><?php echo $row['contact_no']; ?></td>
+                                    <td class="text-center"><?php echo $row['email_address']; ?></td>
+                                    <td class="text-center"><?php echo $row['shipping_address']; ?></td>
                                     <td class="text-center">
-                                    <a class="icons edit-icon" 
+                                    <a class="icons edit-icon editCustomerInfo" 
+                                    data-toggle="modal" data-target="#editCustomer"
                                     data-id="<?php echo $row['id']; ?>" 
-                                    data-name="<?php echo $row['customer_name']; ?>"
+                                    data-customerID="<?php echo $row['customer_id']; ?>" 
+                                    data-name="<?php echo $row['name']; ?>"
                                     data-contactNo="<?php echo $row['contact_no']; ?>"
                                     data-email="<?php echo $row['email_address']; ?>"
-                                    data-shipping="<?php echo $row['shipping_address']; ?>" 
+                                    data-shipping="<?php echo $row['shipping_address']; ?>"
                                     href="javascript:void(0)">
-                                        <span class="es-edit"></span>
-                                    </a>
+                                        <span class="es-edit">Edit</span>
+                                     </a>
                                     </td>
-                                    <td class="text-center"><a class="icons delete-icon btn-delete" href="javascript:void(0)" data-url="delete-buyer.php" data-key="<?php echo ($row['id']); ?>"><span class="es-delete"></span></a></td>
+                                    <td class="text-center"><a class="icons delete-icon btn-delete" href="javascript:void(0)" data-url="#" data-key="<?php echo ($row['id']); ?>"><span class="es-delete"></span>Delete</a></td>
                                 </tr>
                             <?php
+                            }
+                                }else{
+                                    echo"<h4>No Customer Record Found</h4>";
                                 }
                             ?>
                                 </tbody>
@@ -111,6 +108,11 @@
     header("location:index.php");
 
 }
+?>
+
+<?php
+        include "popup-edit/edit-customer.php";
+       
     ?>
 </body>
 
