@@ -1,7 +1,8 @@
 <?php
     include "coreFunctions/connect.php";
     include "coreFunctions/coreFunction.php";
-    // $oID = sterilizeValue($_POST['o_id']);
+    $id = sterilizeValue($_POST['id']);
+    $oID = sterilizeValue($_POST['o_id']);
     $customerID = sterilizeValue($_POST['customer_id']);
     $destination = sterilizeValue($_POST['destination']);
     $cardUsed = sterilizeValue($_POST['card_used']);
@@ -15,6 +16,7 @@
     if(empty($customerID) || empty($destination) || empty($cardUsed) || empty($currencyAmount) || empty($buyingUP) || empty($buyingBDT) || empty($grossProfit) || empty($purchaseDate)){
         echo "Please fill up all the input fields";
     }else{
+        // $oID = dataEncrypt($oID);
         // $customerID = dataEncrypt($customerID);
         // $destination = dataEncrypt($destination);
         // $cardUsed = dataEncrypt($cardUsed);
@@ -25,7 +27,8 @@
         // $purchaseDate = dataEncrypt($purchaseDate);
         // $notes = dataEncrypt($notes);
 
-        if(insert("purchased", array("customer_id","destination","card_used", "currency_amount", "buying_UP", "buying_BDT","gross_profit","purchase_date","note"), array($customerID,$destination,$cardUsed,$currencyAmount,$buyingUP,$buyingBDT,$grossProfit,$purchaseDate,$notes))){
+        if(insert("purchased", array("o_id","customer_id","destination","card_used", "currency_amount", "buying_UP", "buying_BDT","gross_profit","purchase_date","note"), array($oID,$customerID,$destination,$cardUsed,$currencyAmount,$buyingUP,$buyingBDT,$grossProfit,$purchaseDate,$notes))){
+            update("orders",array("status"),array("purchased",$id),"id");
             echo "Product Successfully Purchased";
         }else{
             echo "Something Went Wrong";

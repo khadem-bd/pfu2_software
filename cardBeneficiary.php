@@ -29,7 +29,7 @@ include "controllers/coreFunctions/coreFunction.php";
                         <div class="col-sm-12 col-md-3 col-lg-3">
                             <div class="form-group">
                                 <span class="icon-search icon"></span>
-                                <input type="text" class="form-control" placeholder="Search">
+                                <input type="text" class="form-control" id="search-card" placeholder="Search">
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-3 col-lg-3"></div>
@@ -45,7 +45,7 @@ include "controllers/coreFunctions/coreFunction.php";
                     </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12">
-                            <table>
+                            <table id="card-data">
                                 <tr>
                                     <th class="text-center">Card Number</th>
                                     <th class="text-center">Card Holder Name</th>

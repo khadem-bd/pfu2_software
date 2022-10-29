@@ -6,7 +6,7 @@ $(document).ready(function() {
         $.ajax({
             type: "POST",
             url: "currencyAction.php",
-            data: {card_id:card_id},
+            data: { card_id: card_id },
             success: (function(data) {
                 $('#currency').html(data);
             })
@@ -18,7 +18,7 @@ $(document).ready(function() {
         var target = $(this).attr("href");
         $(target).addClass("open");
     })
-    
+
 
     $("body").on("click", ".closeModal", function() {
         $(".pfu2-modal").removeClass("open");
@@ -34,14 +34,6 @@ $(document).ready(function() {
     })
 
 
-
-    // $("body").on("click", ".triggerPurchaseForm", function(event) {
-    //     event.preventDefault();
-    //     var purchaseInfo = $(this).attr("href");
-    //     $(purchaseInfo).addClass("open");
-        
-    // })
-
     $("body").on("click", ".triggerPurchaseForm", function(event) {
         event.preventDefault();
         var targetElem = $(this);
@@ -50,40 +42,42 @@ $(document).ready(function() {
         $.ajax({
             type: "POST",
             url: "controllers/purchaseInfo.php",
-            data: {id:id },
+            data: { id: id },
             success: (function(data) {
                 // console.log(data);
                 var purchaseInfo = JSON.parse(data);
+                $('#id').val(purchaseInfo.id);
+                $('#oid').val(purchaseInfo.o_id);
                 $('#customerID').val(purchaseInfo.customer_id);
                 $('#selling').val(purchaseInfo.total_price);
                 $('#advance').val(purchaseInfo.advance);
                 var purchaseInfo = targetElem.attr("href");
                 $(purchaseInfo).addClass("open");
-                
+
             })
-        });    
+        });
     })
 
 
     //TRIGGER ADDRESS FORM TO OPEN THE POPUP MODAL 
     $("body").on("click", ".triggerAddressForm", function(event) {
-        event.preventDefault();
-        var target = $(this).attr("data-target");
-        $(target).addClass("open");
-    })
-    //TRIGGER USER FORM TO OPEN THE POPUP MODAL 
+            event.preventDefault();
+            var target = $(this).attr("data-target");
+            $(target).addClass("open");
+        })
+        //TRIGGER USER FORM TO OPEN THE POPUP MODAL 
     $("body").on("click", ".triggerUserForm", function(event) {
-        event.preventDefault();
-        var target = $(this).attr("data-target");
-        $(target).addClass("open");
-    })
-    //TRIGGER CARD FORM TO OPEN THE POPUP MODAL 
+            event.preventDefault();
+            var target = $(this).attr("data-target");
+            $(target).addClass("open");
+        })
+        //TRIGGER CARD FORM TO OPEN THE POPUP MODAL 
     $("body").on("click", ".triggerCardForm", function(event) {
-        event.preventDefault();
-        var target = $(this).attr("data-target");
-        $(target).addClass("open");
-    })
-    //SIGN IN REQUEST AND REDIRECT TO DASHBOARD.PHP PAGE 
+            event.preventDefault();
+            var target = $(this).attr("data-target");
+            $(target).addClass("open");
+        })
+        //SIGN IN REQUEST AND REDIRECT TO DASHBOARD.PHP PAGE 
     $("form#signinForm").submit(function(event) {
         event.preventDefault();
         ajaxSubmitForm("#signinForm", "signInAction.php", "Access Granted", "#signinSuccess", "#signinError", "relocate", "customers.php");
@@ -108,19 +102,19 @@ $(document).ready(function() {
     });
 
     //AJAX REQUEST TO INSERT THE DATAS THROUGH FORM
-    $("form#orderEntryForm").submit(function(event){
+    $("form#orderEntryForm").submit(function(event) {
         event.preventDefault();
-        ajaxSubmitForm("#orderEntryForm","controllers/newCustomer&OrderEntry.php","New order Created Successfully","#orderEntrySuccess","#orderEntryError","refresh","");
+        ajaxSubmitForm("#orderEntryForm", "controllers/newCustomer&OrderEntry.php", "New order Created Successfully", "#orderEntrySuccess", "#orderEntryError", "refresh", "");
     });
 
     //AJAX REQUEST TO INSERT PURCHASE DATAS THROUGH FORM
-    $("form#new-purchase").submit(function(event){
+    $("form#new-purchase").submit(function(event) {
         event.preventDefault();
-        ajaxSubmitForm("#new-purchase","controllers/newPurchase.php","Product Successfully Purchased","#newPurchaseSuccess","#newPurchaseError","refresh","orders.php");
+        ajaxSubmitForm("#new-purchase", "controllers/newPurchase.php", "Product Successfully Purchased", "#newPurchaseSuccess", "#newPurchaseError", "refresh", "orders.php");
         // alert('hello');
     });
 
-     //AJAX REQUEST TO UPDATE USER DATAS THROUGH FORM
+    //AJAX REQUEST TO UPDATE USER DATAS THROUGH FORM
     $("form#editCustomerForm").submit(function(event) {
         event.preventDefault();
         ajaxSubmitForm("#editCustomerForm", "controllers/editCustomerAction.php", "Customer information updated successfully", "#editCustomerSuccess", "#editCustomerError", "refresh", "customers.php");
@@ -128,8 +122,8 @@ $(document).ready(function() {
 
     //AJAX REQUEST TO UPDATE CUSTOMER DATAS THROUGH FORM
     $("form#editUserForm").submit(function(event) {
-    event.preventDefault();
-    ajaxSubmitForm("#editUserForm", "controllers/editUserAction.php", "User information updated successfully", "#editUserSuccess", "#editUserError", "refresh", "userAccount.php");
+        event.preventDefault();
+        ajaxSubmitForm("#editUserForm", "controllers/editUserAction.php", "User information updated successfully", "#editUserSuccess", "#editUserError", "refresh", "userAccount.php");
     });
 
     //AJAX REQUEST TO UPDATE CARD DATAS THROUGH FORM
@@ -144,9 +138,9 @@ $(document).ready(function() {
         ajaxSubmitForm("#editAddressForm", "controllers/editAddressAction.php", "Address information updated successfully", "#editAddressSuccess", "#editAddressError", "refresh", "addressBeneficiary.php");
     });
 
-     
+
     // CUSTOMER CONTACT NUMBER AUTO SUGGESTION
-    $("body").on("keyup","#customerDetailsAutoSuggest", function() {
+    $("body").on("keyup", "#customerDetailsAutoSuggest", function() {
         var elem = $(this);
         var value = $(this).val();
         if (value != "") {
@@ -263,7 +257,7 @@ $(document).ready(function() {
     });
 
     //CUSTOMER LIVE SEARCH KEYUP EVENT SCRIPT CODE 
-    $("body").on("keyup","#search-customer",function(){
+    $("body").on("keyup", "#search-customer", function() {
         var searchItem = $(this).val();
         $.ajax({
             type: "post",
@@ -276,7 +270,7 @@ $(document).ready(function() {
     });
 
     //ORDER LIVE SEARCH KEYUP EVENT SCRIPT CODE
-    $("body").on("keyup","#search-order",function(){
+    $("body").on("keyup", "#search-order", function() {
         var searchOrder = $(this).val();
         $.ajax({
             type: "post",
@@ -288,6 +282,63 @@ $(document).ready(function() {
         })
     });
 
+    //PURCHASE STATUS SORTING FROM ORDER PAGE 
+    $("body").on("change", "#status-sort", function() {
+        var statusSort = $(this).val();
+        //alert(status);
+        $.ajax({
+            type: "post",
+            url: "orderStatusSort.php",
+            data: { statusSort: statusSort },
+            success: (function(data) {
+                $("#order-data").html(data);
+            })
+        })
+    });
+
+    //PURCHASE LIVE SEARCH KEYUP EVENT SCRIPT CODE
+    $("body").on("keyup", "#search-purchase", function() {
+        var searchPurchase = $(this).val();
+        $.ajax({
+            type: "post",
+            url: "purchaseLiveSearch.php",
+            data: { searchPurchase: searchPurchase },
+            success: (function(data) {
+                $("#purchase-data").html(data);
+            })
+        })
+    });
+    //CARD LIVE SEARCH KEYUP EVENT SCRIPT CODE
+    $("body").on("keyup", "#search-card", function() {
+        var searchCard = $(this).val();
+        $.ajax({
+            type: "post",
+            url: "cardLiveSearch.php",
+            data: { searchCard: searchCard },
+            success: (function(data) {
+                $("#card-data").html(data);
+            })
+        })
+    });
+
+    //Validation popup
+    $("body").on("click", ".deletePopup", function() {
+        var id = $(this).attr("data-delete-id");
+        $("#deleteActionTrigger").attr("data-target", id);
+        $("#deleteValidationPopup").addClass("show");
+    });
+
+    $("body").on("click", "#deleteActionTrigger", function() {
+        var id = $(this).attr("data-target");
+        id = "#" + id;
+        $(id).click();
+    });
+
+
+    $("body").on("click", "#cancelDelete", function() {
+        $("#deleteActionTrigger").attr("data-target", "");
+        $("#deleteValidationPopup").removeClass("show");
+    });
 })
 
 //DELETE FUNCTIION FOR ADDRESS BENEFICIARY 
@@ -331,21 +382,3 @@ function getAutoEntryTableVal(targetElem, key, searchKeyColName, columnName, tab
         })
     });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-

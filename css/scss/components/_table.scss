@@ -3,15 +3,17 @@ table {
     tr {
         th {
             background-color: #F0F0F0;
-            padding: 10px 5px;
-            font-size: 16px;
+            padding: 5px;
+            font-size: 13px;
             font-weight: 600;
+            white-space: nowrap;
         }
         td {
-            padding: 10px 5px;
-            font-size: 14px;
+            padding: 5px;
+            font-size: 13px;
             font-weight: 500;
             border-bottom: 1px solid #F0F0F0;
+            white-space: nowrap;
             a {
                 color: #5F5CF4;
                 text-decoration: underline;

@@ -63,6 +63,13 @@ include "coreFunctions/coreFunction.php";
         ||empty($countryOfOrigin)) {
         echo 'Please fill up all the fields';
     }else{
+        // $customerId = dataEncrypt($customerId);
+        // $customerName = dataEncrypt($customerName);
+        // $contactNo =  dataEncrypt($contactNo);
+        // $emailAddress = dataEncrypt($emailAddress);
+        // $shippingAddress = dataEncrypt($shippingAddress);
+
+
         $customerDetails = array('customer_id','name','contact_no','email_address','shipping_address');
         $customerValues = array($customerId,$customerName,$contactNo,$emailAddress,$shippingAddress);
         

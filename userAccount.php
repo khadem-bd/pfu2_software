@@ -33,9 +33,7 @@ include "controllers/coreFunctions/coreFunction.php";
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-3 col-lg-3"></div>
-                        <div class="col-sm-12 col-md-3 col-lg-3">
-
-                        </div>
+                        <div class="col-sm-12 col-md-3 col-lg-3"></div>
                         <div class="col-sm-12 col-md-3 col-lg-3">
                             <div class="form-group">
                                 <!-- <li><button class="triggerUserForm btn btn-primary form-control" href="#newUser"> Add New User</button></li>-->
@@ -59,7 +57,7 @@ include "controllers/coreFunctions/coreFunction.php";
                             $sql = "SELECT * FROM user ORDER BY id DESC";
                             $result  = $conn->query($sql);
                             echo "<tbody>";
-                            while ($row = $result->fetch_assoc()) {
+                            while($row = $result->fetch_assoc()) {
                         ?>
                         <tr>
                             <td><?php echo dataDecrypt($row['user_name']); ?></td>

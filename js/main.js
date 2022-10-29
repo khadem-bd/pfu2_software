@@ -73,9 +73,9 @@ $(document).ready(function() {
             <div class="form-group">\
                 <label>Country of Origin</label>\
                 <select name="country_of_origin[]" class="form-control" id="">\
-                    <option class="form-control" value="country">Select Country</option>\
-                    <option class="form-control" value="USA">USA</option>\
-                    <option class="form-control" value="UK">UK</option>\
+                    <option value="country">Select Country</option>\
+                    <option value="USA">USA</option>\
+                    <option value="UK">UK</option>\
                 </select>\
             </div>\
         </div>\
@@ -140,34 +140,17 @@ $(document).ready(function() {
         $("#grandTotal").val(calculateGT());
     })
 
-    // $("body").on("change", "#currency", function() {
-    //     var currencyAmount = $(this).attr('data-rate');
-    //     alert (currencyAmount);
-    //     var buyingUP = $("#buying").val();
-    //     var selling = $("#selling").val();
-    //     // var rate = $(this).attr('data-rate');
-    //     var total = currencyAmount * buyingUP;
-    //     var grossProfit = selling - total;
-    //     $("#buyingBDT").val(total);
-    //     $("#grossProfit").val(grossProfit);
-    // });
+
     $("body").on("keyup", "#buying", function() {
         var currencyAmount = $('#currency').children("option:selected").attr('data-rate');
-        
-        // currencyAmount = parseFloat(currencyAmount);
-        // console.log(currencyAmount);
         var buyingUP = $(this).val();
-        // buyingUP = parseFloat(buyingUP);
-        // console.log(buyingUP);
         var selling = parseFloat($("#selling").val());
-        var total = (parseFloat(currencyAmount) * parseFloat(buyingUP));
-        // console.log(total);
-        var grossProfit = (selling - total);
+        var total = (parseFloat(currencyAmount) * parseFloat(buyingUP)).toFixed(2);
+        var grossProfit = (selling - total).toFixed(2);
         $("#buyingBDT").val(total);
         $("#grossProfit").val(grossProfit);
     });
     
-
 
     //DRILLDOWN PRESENTATION OF ORDER DETAILS OF PARTICULAR CUSTOMER
 
@@ -250,5 +233,41 @@ function getOrderIDGenerator() {
         })
     });
 }
+
+$( function() {
+    var dateFormat = "yy/mm/dd",
+      from = $( "#from" )
+        .datepicker({
+        //   defaultDate: "+1w",
+          changeMonth: true,
+          numberOfMonths: 1,
+          dateFormat : "yy/mm/dd"
+        })
+        .on( "change", function() {
+          to.datepicker( "option", "minDate", getDate( this ) );
+        }),
+      to = $( "#to" ).datepicker({
+        // defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 1,
+        dateFormat : "yy/mm/dd"
+      })
+      .on( "change", function() {
+        from.datepicker( "option", "maxDate", getDate( this ) );
+      });
+ 
+    function getDate( element ) {
+      var date;
+      try {
+        date = $.datepicker.parseDate( dateFormat, element.value );
+      } catch( error ) {
+        date = null;
+      }
+ 
+      return date;
+    }
+  } );
+
+
 
 

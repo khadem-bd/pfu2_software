@@ -14,6 +14,18 @@
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <div class="tile">
                         <div class="row">
+                            <div hidden class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label>ID</label>
+                                        <input type="text" id="id" name="id" class="form-control" readonly> 
+                                </div>
+                            </div>
+                            <div hidden class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label>OID</label>
+                                        <input type="text" id="oid" name="o_id" class="form-control" readonly> 
+                                </div>
+                            </div>
                             
                             <div class="col-sm-12 col-md-4 col-lg-4">
                                 <div class="form-group">
@@ -52,7 +64,6 @@
                                              //echo "<option data-id=".$row['id']." value=" . dataDecrypt($row['card_holder_name']) . ">" . dataDecrypt($row['card_holder_name']) ." - ".dataDecrypt($row['card_type']). "</option>";
                                         }
                                     ?> 
-                                    
                                     </select>
                                 </div>
                             </div>

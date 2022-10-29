@@ -23,7 +23,7 @@ include "controllers/coreFunctions/coreFunction.php";
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-3 col-lg-3"></div>
-                        <div class="col-sm-12 col-md-3 col-lg-3">
+                        <!-- <div class="col-sm-12 col-md-3 col-lg-3">
                             <div class="form-group">
                                 <span class="icon-calander icon"></span>
                                 <input type="text" class="form-control" placeholder="Start Date">
@@ -34,51 +34,63 @@ include "controllers/coreFunctions/coreFunction.php";
                                 <span class="icon-calander icon"></span>
                                 <input type="text" class="form-control" placeholder="End Date">
                             </div>
-                        </div>
+                        </div> -->
                     </div>
 
 
                    
                     <div class="row">
-                        <div class="col-sm-12 col-md-12 col-lg-12">                          
-                          <table>
-                            <?php
-                            include "modals/new-purchase.php"; 
-                            ?>
-                              <thead class="text-center">
-                                <tr>
-                                    <th>Product Description</th>
-                                    <th>Color</th>
-                                    <th>Size</th>
-                                    <th>Product URL</th>
-                                    <th>Origin</th>
-                                    <th>Unit Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total Price</th>
-                                    <th>Advance</th>
-                                    <th>Remaining</th>
-                                    <th>Status</th>
+                        <div class="col-sm-12 col-md-12 col-lg-12">    
+                            <div class="table-responsive">
+                                <table>
                                     <?php
-                                    if($_COOKIE['usertype'] == "Super Admin"){ 
+                                    include "modals/new-purchase.php"; 
                                     ?>
-                                    <th>Action</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
-                                    <?php 
-                                    }
-                                    ?>
-                                    
-                                </tr>
-                              </thead>
-
-                              <tbody id="fetch-data">
-                                
-                              </tbody>
-
-                              
-                               </table>
-                               
- 
+                                    <thead class="text-center">
+                                        
+                                            <?php 
+                                            if($_COOKIE['usertype'] == 'Super Admin'){
+                                            ?>
+                                        <tr>
+                                            <th>Product Description</th>
+                                            <th>Color</th>
+                                            <th>Size</th>
+                                            <th>Product URL</th>
+                                            <th>Origin</th>
+                                            <th>Unit Price</th>
+                                            <th>Quantity</th>
+                                            <th>Total Price</th>
+                                            <th>Advance</th>
+                                            <th>Remaining</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                            <?php
+                                            }else{     
+                                           ?>
+                                        <tr>
+                                            <th>Product Description</th>
+                                            <th>Color</th>
+                                            <th>Size</th>
+                                            <th>Product URL</th>
+                                            <th>Origin</th>
+                                            <th>Unit Price</th>
+                                            <th>Quantity</th>
+                                            <th>Total Price</th>
+                                            <th>Advance</th>
+                                            <th>Remaining</th>
+                                            <th>Status</th>
+                                            <th>Edit</th>
+                                        </tr>
+                                        <?php 
+                                            }
+                                        ?>
+                                </thead>
+                                        <tbody id="fetch-data"></tbody>
+                                </table>
+                            </div>                          
                         </div>
                     </div>
                 </div>

@@ -30,6 +30,7 @@
             border: 1px solid $dark;
         }
     }
+
 }
 
 .btn {
@@ -43,6 +44,7 @@
         background-color: $red;
         color: $white;
     }
+
     &:focus {
         box-shadow: unset;
     }

@@ -19,7 +19,7 @@
             <a href="orders.php"><span class="icon-orders icon"></span> Order</a>
         </li>
         <li>
-            <a href="purchase.php"><span class="icon-purchase icon"></span> Purchased</a>
+            <a href="purchase.php"><span class="icon-purchase icon"></span> Purchase Record</a>
         </li>
         <?php
         if($_COOKIE['usertype'] == "Super Admin"){

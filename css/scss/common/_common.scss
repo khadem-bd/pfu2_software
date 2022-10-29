@@ -1,4 +1,5 @@
 $red:#D3202C;
+$green:#28a745;
 $dark:#444;
 body {
     font-family: 'Montserrat', sans-serif;
@@ -34,6 +35,11 @@ li {
 
 .container-fluid {
     padding: 0px 100px;
+}
+
+.hidden,
+.realDelete {
+    display: none;
 }
 
 .tile {

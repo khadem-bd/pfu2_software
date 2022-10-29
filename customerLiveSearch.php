@@ -28,7 +28,7 @@
             <td class="text-center">'. $row["customer_id"].'</td>
             <td class="text-center">'. $row["name"].'</td>
             <td class="text-center">'. $row["contact_no"].'</td>
-            <td class="text-center">'.$row["email_address"].'</td>
+            <td class="text-center">'. $row["email_address"].'</td>
             <td class="text-center">'. $row["shipping_address"].'</td>
             <td class="text-center">
             <a class="icons edit-icon editCustomerInfo" 
@@ -49,6 +49,6 @@
         $html.= '</table>';
         echo $html;
     }else{
-        echo "<h4>No Record Found with the search</h4>";
+        echo "<h6 class='error-message'>No Customer Record Found with the search. . .</h6>";
     }
 ?>
